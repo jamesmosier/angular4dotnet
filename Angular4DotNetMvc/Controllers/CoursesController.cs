@@ -3,6 +3,7 @@
 namespace Angular4DotNetMvc.Controllers
 {
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
     public class CoursesController : Controller
     {
@@ -19,7 +20,8 @@ namespace Angular4DotNetMvc.Controllers
                     new CourseVM {Number= "DARK502", Name= "Defense Against Dark Matter", Instructor="Marilyn Manson"},
                     new CourseVM {Number= "TRAN201", Name= "Tranfiguration", Instructor="Minerva McGonagall"}
                 };
-            return JsonConvert.SerializeObject(courses);
+            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            return JsonConvert.SerializeObject(courses, Formatting.None, settings);
         }
 
     }
